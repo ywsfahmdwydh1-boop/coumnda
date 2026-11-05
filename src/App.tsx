@@ -39,16 +39,16 @@ function AppContent() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 pb-28 md:pb-10">
         
         {/* 1. INTRODUCTORY LANDING PAGE (VISITORS ONLY) */}
-        {!user && currentTab === 'landing' && (
+        {!user && currentTab !== 'guide' && (
           <LandingPageView
             onGetStarted={() => setIsAuthOpen(true)}
-            onExploreServices={() => setCurrentTab('services')}
+            onExploreServices={() => setIsAuthOpen(true)}
             onContactAdmin={() => window.open('https://wa.me/201556266856', '_blank')}
           />
         )}
 
-        {/* 2. SERVICES & GAMING CATALOG */}
-        {currentTab === 'services' && (
+        {/* 2. SERVICES & GAMING CATALOG (AUTHENTICATED USERS) */}
+        {user && currentTab === 'services' && (
           <ServicesView
             onNavigateToWallet={() => setCurrentTab('wallet')}
             onNavigateToOrders={() => setCurrentTab('orders')}
@@ -56,15 +56,15 @@ function AppContent() {
         )}
 
         {/* 3. ORDERS VIEW */}
-        {currentTab === 'orders' && (
+        {user && currentTab === 'orders' && (
           <OrdersView onNavigateToServices={() => setCurrentTab('services')} />
         )}
 
         {/* 4. WALLET & RECHARGE */}
-        {currentTab === 'wallet' && <WalletView />}
+        {user && currentTab === 'wallet' && <WalletView />}
 
         {/* 5. SUPPORT TICKETS */}
-        {currentTab === 'tickets' && <TicketsView />}
+        {user && currentTab === 'tickets' && <TicketsView />}
 
         {/* 6. USER GUIDE & FAQ */}
         {currentTab === 'guide' && <UserGuideView onNavigateTab={setCurrentTab} />}

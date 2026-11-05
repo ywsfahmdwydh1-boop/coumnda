@@ -1254,11 +1254,6 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigateToWallet, 
                           <Sparkles className="w-3 h-3 text-emerald-400" />
                           <span>حساب حقيقي 100% بدون أي تزويد</span>
                         </span>
-                      ) : service.isOffer ? (
-                        <span className="text-[10px] bg-rose-500/20 text-rose-300 px-2 py-0.5 rounded-md border border-rose-500/40 font-bold flex items-center gap-1">
-                          <Flame className="w-3 h-3 text-rose-400 animate-pulse" />
-                          <span>عرض حصري خصم {service.discountPercent || 8}%</span>
-                        </span>
                       ) : isPackage ? (
                         <span className="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-md border border-amber-500/30 font-bold flex items-center gap-1">
                           <Tag className="w-3 h-3" />
@@ -1297,18 +1292,6 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigateToWallet, 
                         <span className="text-lg sm:text-xl font-black text-amber-400 font-mono">
                           {service.pricePer1000.toFixed(2)} ج.م
                         </span>
-                        {service.originalPriceBeforeDiscount && (
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-xs text-slate-500 line-through font-mono">
-                              {service.originalPriceBeforeDiscount.toFixed(2)} ج.م
-                            </span>
-                            {service.discountPercent && (
-                              <span className="text-[10px] text-emerald-400 font-bold bg-emerald-500/15 border border-emerald-500/30 px-1.5 py-0.2 rounded">
-                                وفر {service.discountPercent}%
-                              </span>
-                            )}
-                          </div>
-                        )}
                       </div>
                       <div className="text-[10px] text-slate-400">
                         {isUnavailable

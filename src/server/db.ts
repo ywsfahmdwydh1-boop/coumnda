@@ -449,7 +449,7 @@ function getInitialData(): DatabaseSchema {
   };
 }
 
-const CURRENT_CATALOG_VERSION = 'v10_xfollowr_full_catalog_30_margin';
+const CURRENT_CATALOG_VERSION = 'v11_clean_prices_no_discounts';
 
 function sanitizeDatabase(data: DatabaseSchema): DatabaseSchema {
   if (data.users && Array.isArray(data.users)) {

@@ -20,6 +20,8 @@ import {
   X,
   FileText,
   BookOpen,
+  Smartphone,
+  Star,
 } from 'lucide-react';
 import { EmailModal } from './EmailModal.tsx';
 
@@ -89,92 +91,131 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
 
               {/* Navigation Tabs */}
               <nav className="hidden md:flex items-center gap-1">
-                {!user && (
-                  <button
-                    onClick={() => setCurrentTab('landing')}
-                    className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                      currentTab === 'landing'
-                        ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
-                        : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
-                    }`}
-                  >
-                    <Sparkles className="w-4 h-4 text-amber-400" />
-                    الرئيسية
-                  </button>
-                )}
+                {!user ? (
+                  <>
+                    <button
+                      onClick={() => setCurrentTab('landing')}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                        currentTab === 'landing'
+                          ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
+                          : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                      }`}
+                    >
+                      <Sparkles className="w-4 h-4 text-amber-400" />
+                      الرئيسية
+                    </button>
 
-                <button
-                  onClick={() => setCurrentTab('services')}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                    currentTab === 'services'
-                      ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-500/30'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
-                  }`}
-                >
-                  <ShoppingBag className="w-4 h-4" />
-                  متجر الخدمات
-                </button>
+                    <a
+                      href="#features"
+                      className="px-3 py-2 rounded-lg text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors"
+                    >
+                      مميزات السيرفر
+                    </a>
 
-                <button
-                  onClick={() => setCurrentTab('orders')}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                    currentTab === 'orders'
-                      ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-500/30'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
-                  }`}
-                >
-                  <ListOrdered className="w-4 h-4" />
-                  طلباتي
-                </button>
+                    <a
+                      href="#app-download"
+                      className="px-3 py-2 rounded-lg text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors flex items-center gap-1.5"
+                    >
+                      <Smartphone className="w-4 h-4 text-indigo-400" />
+                      <span>تطبيق الهاتف</span>
+                    </a>
 
-                <button
-                  onClick={() => setCurrentTab('wallet')}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                    currentTab === 'wallet'
-                      ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-500/30'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
-                  }`}
-                >
-                  <Wallet className="w-4 h-4" />
-                  إيداع الرصيد
-                </button>
+                    <a
+                      href="#reviews"
+                      className="px-3 py-2 rounded-lg text-sm font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors flex items-center gap-1"
+                    >
+                      <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                      <span>التقييمات (4.9 ⭐)</span>
+                    </a>
 
-                <button
-                  onClick={() => setCurrentTab('tickets')}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                    currentTab === 'tickets'
-                      ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-500/30'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
-                  }`}
-                >
-                  <Headphones className="w-4 h-4" />
-                  الدعم الفني
-                </button>
+                    <button
+                      onClick={() => setCurrentTab('guide')}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                        currentTab === 'guide'
+                          ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                          : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                      }`}
+                    >
+                      <BookOpen className="w-4 h-4 text-amber-400" />
+                      دليل الاستخدام
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      onClick={() => setCurrentTab('services')}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                        currentTab === 'services'
+                          ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-500/30'
+                          : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                      }`}
+                    >
+                      <ShoppingBag className="w-4 h-4" />
+                      متجر الخدمات
+                    </button>
 
-                <button
-                  onClick={() => setCurrentTab('guide')}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
-                    currentTab === 'guide'
-                      ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                      : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
-                  }`}
-                >
-                  <BookOpen className="w-4 h-4 text-amber-400" />
-                  دليل الاستخدام
-                </button>
+                    <button
+                      onClick={() => setCurrentTab('orders')}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                        currentTab === 'orders'
+                          ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-500/30'
+                          : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                      }`}
+                    >
+                      <ListOrdered className="w-4 h-4" />
+                      طلباتي
+                    </button>
 
-                {isAdmin && (
-                  <button
-                    onClick={() => setCurrentTab('admin')}
-                    className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-bold transition-all shadow-sm ${
-                      currentTab === 'admin'
-                        ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40 ring-1 ring-rose-500/30'
-                        : 'bg-rose-950/40 text-rose-400 hover:bg-rose-900/40 border border-rose-800/40'
-                    }`}
-                  >
-                    <ShieldAlert className="w-4 h-4 text-rose-400" />
-                    لوحة الإدارة
-                  </button>
+                    <button
+                      onClick={() => setCurrentTab('wallet')}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                        currentTab === 'wallet'
+                          ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-500/30'
+                          : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                      }`}
+                    >
+                      <Wallet className="w-4 h-4" />
+                      إيداع الرصيد
+                    </button>
+
+                    <button
+                      onClick={() => setCurrentTab('tickets')}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                        currentTab === 'tickets'
+                          ? 'bg-indigo-600/20 text-indigo-400 border border-indigo-500/30'
+                          : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                      }`}
+                    >
+                      <Headphones className="w-4 h-4" />
+                      الدعم الفني
+                    </button>
+
+                    <button
+                      onClick={() => setCurrentTab('guide')}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                        currentTab === 'guide'
+                          ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                          : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+                      }`}
+                    >
+                      <BookOpen className="w-4 h-4 text-amber-400" />
+                      دليل الاستخدام
+                    </button>
+
+                    {isAdmin && (
+                      <button
+                        onClick={() => setCurrentTab('admin')}
+                        className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-bold transition-all shadow-sm ${
+                          currentTab === 'admin'
+                            ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40 ring-1 ring-rose-500/30'
+                            : 'bg-rose-950/40 text-rose-400 hover:bg-rose-900/40 border border-rose-800/40'
+                        }`}
+                      >
+                        <ShieldAlert className="w-4 h-4 text-rose-400" />
+                        لوحة الإدارة
+                      </button>
+                    )}
+                  </>
                 )}
               </nav>
             </div>
@@ -323,10 +364,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
               ) : (
                 <button
                   onClick={onOpenAuth}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm shadow-md shadow-indigo-600/30 transition-all hover:scale-102"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-amber-500/20 transition-all hover:scale-102 cursor-pointer"
                 >
-                  <UserIcon className="w-4 h-4" />
-                  <span>تسجيل الدخول</span>
+                  <UserIcon className="w-4 h-4 text-slate-950" />
+                  <span>تسجيل الدخول / حساب جديد</span>
                 </button>
               )}
             </div>
@@ -338,104 +379,136 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
 
       {/* Android Native Fixed Bottom Navigation Bar for Mobile */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-slate-950/95 backdrop-blur-lg border-t border-slate-800/90 px-1 py-1.5 flex items-center justify-around shadow-2xl safe-area-bottom">
-        {!user && (
-          <button
-            onClick={() => setCurrentTab('landing')}
-            className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all ${
-              currentTab === 'landing'
-                ? 'text-amber-400 font-black bg-amber-500/10'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            <Sparkles className="w-5 h-5 mb-0.5" />
-            <span className="text-[10px]">الرئيسية</span>
-          </button>
+        {!user ? (
+          <>
+            <button
+              onClick={() => setCurrentTab('landing')}
+              className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all ${
+                currentTab === 'landing'
+                  ? 'text-amber-400 font-black bg-amber-500/10'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <Sparkles className="w-5 h-5 mb-0.5" />
+              <span className="text-[10px]">الرئيسية</span>
+            </button>
+
+            <a
+              href="#app-download"
+              className="flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-slate-400 hover:text-indigo-400"
+            >
+              <Smartphone className="w-5 h-5 mb-0.5" />
+              <span className="text-[10px]">التطبيق</span>
+            </a>
+
+            <a
+              href="#reviews"
+              className="flex flex-col items-center justify-center py-1 px-2.5 rounded-xl text-slate-400 hover:text-amber-400"
+            >
+              <Star className="w-5 h-5 mb-0.5" />
+              <span className="text-[10px]">التقييمات</span>
+            </a>
+
+            <button
+              onClick={() => setCurrentTab('guide')}
+              className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all ${
+                currentTab === 'guide'
+                  ? 'text-amber-300 font-black bg-amber-500/10'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <BookOpen className="w-5 h-5 mb-0.5" />
+              <span className="text-[10px]">الدليل</span>
+            </button>
+
+            <button
+              onClick={onOpenAuth}
+              className="flex flex-col items-center justify-center py-1 px-3.5 rounded-xl bg-amber-500 text-slate-950 font-black shadow-md shadow-amber-500/20 active:scale-95"
+            >
+              <UserIcon className="w-5 h-5 mb-0.5" />
+              <span className="text-[11px]">دخول</span>
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              onClick={() => setCurrentTab('services')}
+              className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all ${
+                currentTab === 'services'
+                  ? 'text-indigo-400 font-black bg-indigo-500/10'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <ShoppingBag className="w-5 h-5 mb-0.5" />
+              <span className="text-[10px]">المتجر</span>
+            </button>
+
+            <button
+              onClick={() => setCurrentTab('orders')}
+              className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all ${
+                currentTab === 'orders'
+                  ? 'text-indigo-400 font-black bg-indigo-500/10'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <ListOrdered className="w-5 h-5 mb-0.5" />
+              <span className="text-[11px]">طلباتي</span>
+            </button>
+
+            <button
+              onClick={() => setCurrentTab('wallet')}
+              className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all relative ${
+                currentTab === 'wallet'
+                  ? 'text-emerald-400 font-black bg-emerald-500/10'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <div className="relative">
+                <Wallet className="w-5 h-5 mb-0.5" />
+                <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-400" />
+              </div>
+              <span className="text-[10px]">إيداع الرصيد</span>
+            </button>
+
+            <button
+              onClick={() => setCurrentTab('tickets')}
+              className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all ${
+                currentTab === 'tickets'
+                  ? 'text-indigo-400 font-black bg-indigo-500/10'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <Headphones className="w-5 h-5 mb-0.5" />
+              <span className="text-[10px]">الدعم</span>
+            </button>
+
+            <button
+              onClick={() => setCurrentTab('guide')}
+              className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all ${
+                currentTab === 'guide'
+                  ? 'text-amber-300 font-black bg-amber-500/10'
+                  : 'text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <BookOpen className="w-5 h-5 mb-0.5" />
+              <span className="text-[10px]">الدليل</span>
+            </button>
+
+            {isAdmin && (
+              <button
+                onClick={() => setCurrentTab('admin')}
+                className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all ${
+                  currentTab === 'admin'
+                    ? 'text-rose-400 font-black bg-rose-500/15'
+                    : 'text-rose-400/80 hover:text-rose-300'
+                }`}
+              >
+                <ShieldAlert className="w-5 h-5 mb-0.5" />
+                <span className="text-[11px]">الإدارة</span>
+              </button>
+            )}
+          </>
         )}
-
-        <button
-          onClick={() => setCurrentTab('services')}
-          className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all ${
-            currentTab === 'services'
-              ? 'text-indigo-400 font-black bg-indigo-500/10'
-              : 'text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <ShoppingBag className="w-5 h-5 mb-0.5" />
-          <span className="text-[10px]">المتجر</span>
-        </button>
-
-        <button
-          onClick={() => setCurrentTab('orders')}
-          className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all ${
-            currentTab === 'orders'
-              ? 'text-indigo-400 font-black bg-indigo-500/10'
-              : 'text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <ListOrdered className="w-5 h-5 mb-0.5" />
-          <span className="text-[11px]">طلباتي</span>
-        </button>
-
-        <button
-          onClick={() => setCurrentTab('wallet')}
-          className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all relative ${
-            currentTab === 'wallet'
-              ? 'text-emerald-400 font-black bg-emerald-500/10'
-              : 'text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <div className="relative">
-            <Wallet className="w-5 h-5 mb-0.5" />
-            <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-emerald-400" />
-          </div>
-          <span className="text-[10px]">إيداع الرصيد</span>
-        </button>
-
-        <button
-          onClick={() => setCurrentTab('tickets')}
-          className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all ${
-            currentTab === 'tickets'
-              ? 'text-indigo-400 font-black bg-indigo-500/10'
-              : 'text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <Headphones className="w-5 h-5 mb-0.5" />
-          <span className="text-[10px]">الدعم</span>
-        </button>
-
-        <button
-          onClick={() => setCurrentTab('guide')}
-          className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all ${
-            currentTab === 'guide'
-              ? 'text-amber-300 font-black bg-amber-500/10'
-              : 'text-slate-400 hover:text-slate-200'
-          }`}
-        >
-          <BookOpen className="w-5 h-5 mb-0.5" />
-          <span className="text-[10px]">الدليل</span>
-        </button>
-
-        {isAdmin ? (
-          <button
-            onClick={() => setCurrentTab('admin')}
-            className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all ${
-              currentTab === 'admin'
-                ? 'text-rose-400 font-black bg-rose-500/15'
-                : 'text-rose-400/80 hover:text-rose-300'
-            }`}
-          >
-            <ShieldAlert className="w-5 h-5 mb-0.5" />
-            <span className="text-[11px]">الإدارة</span>
-          </button>
-        ) : !user ? (
-          <button
-            onClick={onOpenAuth}
-            className="flex flex-col items-center justify-center py-1 px-3 rounded-xl text-indigo-400 hover:text-indigo-300"
-          >
-            <UserIcon className="w-5 h-5 mb-0.5" />
-            <span className="text-[11px]">دخول</span>
-          </button>
-        ) : null}
       </nav>
 
       {/* Real-time Incoming Notification Toast (Safe bottom offset for mobile navbar) */}
