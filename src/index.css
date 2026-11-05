@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Cairo';
+  src: url('/cairo-400.woff2') format('woff2');
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cairo';
+  src: url('/cairo-700.woff2') format('woff2');
+  font-weight: 600 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: 'Cairo', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif;
+}
+
+html, body, button, input, textarea, select, span, div, p {
+  font-family: 'Cairo', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif;
+}
+
+code, pre, .font-mono {
+  font-family: 'Cairo', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  body {
+    font-family: 'Cairo', 'Noto Sans Arabic', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-x: hidden;
+  }
+}
+
+/* Allow horizontal lists to scroll horizontally without capturing vertical swipe */
+.scroll-touch-safe {
+  touch-action: pan-x pan-y pinch-zoom;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}

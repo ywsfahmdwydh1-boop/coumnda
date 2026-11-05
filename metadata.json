@@ -1,0 +1,8 @@
+{
+  "name": "KOUMND | منصة كومند للخدمات الرقمية وإدارة الطلبات",
+  "description": "منصة متكاملة واحترافية للخدمات الرقمية وشحن الأرصدة وإدارة الطلبات والمدفوعات والدعم الفني مع ربط API للمزود.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

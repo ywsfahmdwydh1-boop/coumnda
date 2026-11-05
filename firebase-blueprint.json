@@ -1,0 +1,116 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User account in KOUMND platform",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "username": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "user"] },
+        "balance": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "suspended"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "username", "email", "role", "balance", "status"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Gaming or social media service order",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderNumber": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "serviceId": { "type": "string" },
+        "serviceName": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "target": { "type": "string" },
+        "quantity": { "type": "number" },
+        "charge": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "in_progress", "completed", "canceled", "refunded"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "orderNumber", "userId", "serviceId", "charge", "status"]
+    },
+    "Service": {
+      "title": "Service",
+      "description": "Service item available in the store",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "pricePer1000": { "type": "number" },
+        "originalProviderCost": { "type": "number" },
+        "minQuantity": { "type": "number" },
+        "maxQuantity": { "type": "number" },
+        "providerServiceId": { "type": "string" },
+        "speed": { "type": "string" },
+        "type": { "type": "string" },
+        "active": { "type": "boolean" },
+        "isAvailable": { "type": "boolean" }
+      },
+      "required": ["id", "categoryId", "name", "pricePer1000", "active"]
+    },
+    "Deposit": {
+      "title": "Deposit",
+      "description": "Balance deposit request via cash wallet 01556266856",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "depositNumber": { "type": "string" },
+        "userId": { "type": "string" },
+        "userEmail": { "type": "string" },
+        "senderPhone": { "type": "string" },
+        "amount": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "transactionRef": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "depositNumber", "userId", "amount", "status"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Store category definition",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "icon": { "type": "string" },
+        "description": { "type": "string" },
+        "sortOrder": { "type": "number" },
+        "active": { "type": "boolean" }
+      },
+      "required": ["id", "name", "active"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles and balances"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Customer orders permanently stored"
+    },
+    "/services/{serviceId}": {
+      "schema": "Service",
+      "description": "Catalog services"
+    },
+    "/deposits/{depositId}": {
+      "schema": "Deposit",
+      "description": "Customer wallet deposit requests"
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Catalog categories"
+    }
+  }
+}
