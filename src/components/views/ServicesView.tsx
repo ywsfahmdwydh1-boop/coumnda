@@ -213,7 +213,7 @@ export const PlatformLogo: React.FC<{ categoryId: string; className?: string }> 
 };
 
 // ============================================================================
-// Authentic Individual Service & App Logo (ChatGPT, Canva, CapCut, Games, etc.)
+// Authentic Dynamic Service & Game Logos (PUBG, Free Fire, FC, Ludo, TikTok, etc.)
 // ============================================================================
 export const ServiceAppLogo: React.FC<{
   serviceName: string;
@@ -222,8 +222,156 @@ export const ServiceAppLogo: React.FC<{
 }> = ({ serviceName, categoryId, className = 'w-6 h-6' }) => {
   const text = (serviceName + ' ' + categoryId).toLowerCase();
 
-  // 1. ChatGPT / OpenAI
-  if (text.includes('gpt') || text.includes('chatgpt') || text.includes('شات') || text.includes('جي بي تي')) {
+  // 1. Games with high-resolution authentic covers
+  if (categoryId === 'cat_pubg' || text.includes('pubg') || text.includes('ببجي')) {
+    return (
+      <img
+        src="/images/games/pubg.webp"
+        alt="PUBG Mobile"
+        className={`${className} object-cover rounded-xl shadow-md border border-amber-500/40`}
+        loading="lazy"
+      />
+    );
+  }
+  if (categoryId === 'cat_freefire' || text.includes('freefire') || text.includes('free fire') || text.includes('فري فاير')) {
+    return (
+      <img
+        src="/images/games/freefire.webp"
+        alt="Free Fire"
+        className={`${className} object-cover rounded-xl shadow-md border border-orange-500/40`}
+        loading="lazy"
+      />
+    );
+  }
+  if (categoryId === 'cat_fifa' || text.includes('fifa') || text.includes('fc mobile') || text.includes('فيفا')) {
+    return (
+      <img
+        src="/images/games/fifa.webp"
+        alt="FC Mobile"
+        className={`${className} object-cover rounded-xl shadow-md border border-emerald-500/40`}
+        loading="lazy"
+      />
+    );
+  }
+  if (categoryId === 'cat_ludo' || text.includes('ludo') || text.includes('يلا لودو') || text.includes('جواكر')) {
+    return (
+      <img
+        src="/images/games/ludo.webp"
+        alt="Yalla Ludo"
+        className={`${className} object-cover rounded-xl shadow-md border border-purple-500/40`}
+        loading="lazy"
+      />
+    );
+  }
+
+  // 2. Roblox
+  if (text.includes('roblox') || text.includes('روبلوكس') || text.includes('روبوكس') || text.includes('robux')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#1E293B" stroke="#64748B" strokeWidth="1" />
+        <rect x="7" y="7" width="10" height="10" rx="2" transform="rotate(-15 12 12)" fill="#E2E8F0" />
+        <rect x="10" y="10" width="4" height="4" rx="1" transform="rotate(-15 12 12)" fill="#0F172A" />
+      </svg>
+    );
+  }
+
+  // 3. Call of Duty Mobile (COD)
+  if (text.includes('cod') || text.includes('call of duty') || text.includes('كود')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#0F172A" stroke="#F59E0B" strokeWidth="1" />
+        <path d="M5 8l7-4 7 4v8l-7 4-7-4V8z" stroke="#F59E0B" strokeWidth="1.5" />
+        <path d="M12 4v16M5 8l14 8M19 8l-14 8" stroke="#F59E0B" strokeWidth="0.8" opacity="0.6" />
+        <circle cx="12" cy="12" r="3" fill="#F59E0B" />
+      </svg>
+    );
+  }
+
+  // 4. TikTok
+  if (categoryId === 'cat_tiktok' || text.includes('tiktok') || text.includes('تيك توك')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#010101" />
+        <path d="M16.6 5.82s.51.5 1.5.6c1 .1 2.4-.3 2.4-.3v2.8s-1.5.1-2.6-.5c-.7-.4-1.3-.9-1.3-.9v6.7c0 3.2-2.6 4.8-4.8 4.8-2.5 0-4.8-1.9-4.8-4.4 0-2.8 2.5-4.4 5.3-4.2v2.9c-1.3-.2-2.4.4-2.4 1.5 0 1 .8 1.5 1.9 1.5 1.4 0 2.1-.9 2.1-2.4V2h2.7v3.82z" fill="#25F4EE" />
+        <path d="M16 5.2s.51.5 1.5.6c1 .1 2.4-.3 2.4-.3v2.8s-1.5.1-2.6-.5c-.7-.4-1.3-.9-1.3-.9v6.7c0 3.2-2.6 4.8-4.8 4.8-2.5 0-4.8-1.9-4.8-4.4 0-2.8 2.5-4.4 5.3-4.2v2.9c-1.3-.2-2.4.4-2.4 1.5 0 1 .8 1.5 1.9 1.5 1.4 0 2.1-.9 2.1-2.4V1.4h2.7v3.8z" fill="#FE2C55" />
+        <path d="M16.3 5.5s.51.5 1.5.6c1 .1 2.4-.3 2.4-.3v2.8s-1.5.1-2.6-.5c-.7-.4-1.3-.9-1.3-.9v6.7c0 3.2-2.6 4.8-4.8 4.8-2.5 0-4.8-1.9-4.8-4.4 0-2.8 2.5-4.4 5.3-4.2v2.9c-1.3-.2-2.4.4-2.4 1.5 0 1 .8 1.5 1.9 1.5 1.4 0 2.1-.9 2.1-2.4V1.7h2.7v3.8z" fill="#FFFFFF" />
+      </svg>
+    );
+  }
+
+  // 5. Instagram
+  if (categoryId === 'cat_instagram' || text.includes('instagram') || text.includes('انستغرام') || text.includes('انستا')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <defs>
+          <radialGradient id="ig-app-logo-dyn" cx="30%" cy="105%" r="120%">
+            <stop offset="0%" stopColor="#fdf497" />
+            <stop offset="25%" stopColor="#fdf497" />
+            <stop offset="50%" stopColor="#fd5949" />
+            <stop offset="70%" stopColor="#d6249f" />
+            <stop offset="100%" stopColor="#285AEB" />
+          </radialGradient>
+        </defs>
+        <rect width="24" height="24" rx="6" fill="url(#ig-app-logo-dyn)" />
+        <rect x="5.5" y="5.5" width="13" height="13" rx="3.5" stroke="#FFFFFF" strokeWidth="1.6" fill="none" />
+        <circle cx="12" cy="12" r="3" stroke="#FFFFFF" strokeWidth="1.6" fill="none" />
+        <circle cx="15.8" cy="8.2" r="0.9" fill="#FFFFFF" />
+      </svg>
+    );
+  }
+
+  // 6. YouTube
+  if (categoryId === 'cat_youtube' || text.includes('youtube') || text.includes('يوتيوب')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#FF0000" />
+        <path d="M10 8.5l5.5 3.5-5.5 3.5V8.5z" fill="#FFFFFF" />
+      </svg>
+    );
+  }
+
+  // 7. Facebook
+  if (categoryId === 'cat_facebook' || text.includes('facebook') || text.includes('فيسبوك')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#1877F2" />
+        <path d="M15.5 12h-2.5v8h-3.3v-8H8v-2.8h1.7V7.5C9.7 5.2 11 4 13.1 4c1 0 2 .1 2 .1v2.3h-1.2c-1.1 0-1.4.7-1.4 1.4v1.4h2.6l-.6 2.8z" fill="#FFFFFF" />
+      </svg>
+    );
+  }
+
+  // 8. Telegram
+  if (categoryId === 'cat_telegram' || text.includes('telegram') || text.includes('تيليجرام')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#24A1DE" />
+        <path d="M17.5 7.2l-1.8 8.8c-.1.6-.5.7-1 .5l-2.8-2.1-1.3 1.3c-.1.2-.3.3-.6.3l.2-2.9 5.3-4.8c.2-.2 0-.3-.3-.1L8.7 12.4l-2.8-.9c-.6-.2-.6-.6.1-.9l11-4.2c.5-.2 1 .1.8.8z" fill="#FFFFFF" />
+      </svg>
+    );
+  }
+
+  // 9. Twitter / X
+  if (categoryId === 'cat_twitter' || text.includes('twitter') || text.includes('تويتر') || text.includes('إكس')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#000000" stroke="#334155" strokeWidth="1" />
+        <path d="M17 5h2.5l-5.5 6.3 6.5 8.7h-5l-4-5.2-4.5 5.2H4.5l5.9-6.7L4 5h5.1l3.6 4.8L17 5zm-1 13.5h1.4L8.2 6.5H6.7l9.3 12z" fill="#FFFFFF" />
+      </svg>
+    );
+  }
+
+  // 10. Snapchat
+  if (categoryId === 'cat_snapchat' || text.includes('snapchat') || text.includes('سناب')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#FFFC00" />
+        <path d="M12 4.5c-2.4 0-3.8 1.6-3.8 3.8 0 .8.2 1.5.3 1.8-.1.1-.3.2-.5.2-.3 0-.6-.2-1-.4-.1-.1-.3 0-.4.1-.1.1-.2.2-.1.4.3 1 1.1 1.6 1.7 1.8.1 0 .2.1.2.2 0 .2.1.5-.1.8-.2.3-.6.4-1.2.5-.2 0-.3.1-.3.3 0 .2.1.3.2.4 1 .7 2.1.9 2.8 1 .1 0 .3.1.3.3.1.4.3.8.8 1 .4.1.7.2 1.1.2.4 0 .7-.1 1.1-.2.5-.2.7-.6.8-1 0-.2.2-.3.3-.3.7-.1 1.8-.3 2.8-1 .1-.1.2-.2.2-.4 0-.2-.1-.3-.3-.3-.6-.1-1-.2-1.2-.5-.2-.3-.1-.6-.1-.8 0-.1.1-.2.2-.2.6-.2 1.4-.8 1.7-1.8.1-.2 0-.3-.1-.4-.1-.1-.3-.2-.4-.1-.4.2-.7.4-1 .4-.2 0-.4-.1-.5-.2.1-.3.3-1 .3-1.8 0-2.2-1.4-3.8-3.8-3.8z" fill="#000000" />
+      </svg>
+    );
+  }
+
+  // 11. ChatGPT / OpenAI
+  if (text.includes('gpt') || text.includes('chatgpt') || text.includes('شات') || text.includes('جي بي تي') || text.includes('openai')) {
     return (
       <svg viewBox="0 0 24 24" className={className} fill="none">
         <rect width="24" height="24" rx="6" fill="#10A37F" />
@@ -235,7 +383,7 @@ export const ServiceAppLogo: React.FC<{
     );
   }
 
-  // 2. Canva Pro
+  // 12. Canva Pro
   if (text.includes('canva') || text.includes('كانفا')) {
     return (
       <svg viewBox="0 0 24 24" className={className} fill="none">
@@ -248,7 +396,7 @@ export const ServiceAppLogo: React.FC<{
     );
   }
 
-  // 3. CapCut Pro
+  // 13. CapCut Pro
   if (text.includes('capcut') || text.includes('كاب كات') || text.includes('كابكات')) {
     return (
       <svg viewBox="0 0 24 24" className={className} fill="none">
@@ -258,7 +406,7 @@ export const ServiceAppLogo: React.FC<{
     );
   }
 
-  // 4. VPN
+  // 14. VPN
   if (text.includes('vpn') || text.includes('في بي ان')) {
     return (
       <svg viewBox="0 0 24 24" className={className} fill="none">
@@ -271,7 +419,33 @@ export const ServiceAppLogo: React.FC<{
     );
   }
 
-  // 5. Discord
+  // 15. WhatsApp
+  if (categoryId === 'cat_whatsapp' || text.includes('whatsapp') || text.includes('واتساب') || text.includes('واتس')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#25D366" />
+        <path
+          d="M12 4.5A7.5 7.5 0 0 0 5.5 15.8L4.5 19.5l3.8-1a7.5 7.5 0 1 0 3.7-14zm3.9 10.6c-.2.5-.9 1-1.4 1.1-.4 0-.8.2-2.7-.6-2.2-.9-3.7-3.2-3.8-3.4-.1-.1-.9-1.2-.9-2.3s.6-1.6.8-1.8c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .5.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .5s-.2.3-.3.4l-.4.5c-.1.1-.3.3-.1.6.2.4.9 1.5 2 2.4 1.3 1.1 2.4 1.5 2.8 1.6.3.1.5.1.7-.1.2-.2.8-1 .1-1.3.2-.3.4-.2.6-.1l1.8.9c.2.1.4.2.5.3.1.3.1.8-.1 1.3z"
+          fill="#FFFFFF"
+        />
+      </svg>
+    );
+  }
+
+  // 16. Spotify
+  if (categoryId === 'cat_spotify' || text.includes('spotify') || text.includes('سبوتيفاي')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#1DB954" />
+        <path
+          d="M16.5 15.6c-.2.3-.5.4-.8.2-2.2-1.3-4.9-1.6-8.2-.9-.3.1-.6-.1-.7-.4-.1-.3.1-.6.4-.7 3.5-.8 6.5-.4 9 1.1.3.2.4.5.3.7zm1.1-2.5c-.2.3-.6.4-.9.2-2.5-1.5-6.3-2-9.2-1.1-.4.1-.8-.1-.9-.5-.1-.4.1-.8.5-.9 3.4-1 7.6-.5 10.3 1.2.4.2.5.7.2 1.1zm.1-2.6C14.7 8.7 9.8 8.5 7 9.4c-.5.1-.9-.1-1.1-.6-.1-.5.1-.9.6-1.1 3.3-1 8.7-.8 12.1 1.2.4.2.6.8.3 1.2-.2.4-.7.6-1.2.4z"
+          fill="#FFFFFF"
+        />
+      </svg>
+    );
+  }
+
+  // 17. Discord
   if (text.includes('discord') || text.includes('دسكورد') || text.includes('ديسكورد')) {
     return (
       <svg viewBox="0 0 24 24" className={className} fill="none">
@@ -284,8 +458,8 @@ export const ServiceAppLogo: React.FC<{
     );
   }
 
-  // 6. Google Maps Reviews
-  if (text.includes('google') || text.includes('جوجل') || text.includes('خرائط') || text.includes('تقييم')) {
+  // 18. Google Maps Reviews
+  if (categoryId === 'cat_google_reviews' || text.includes('google') || text.includes('جوجل') || text.includes('خرائط') || text.includes('تقييم')) {
     return (
       <svg viewBox="0 0 24 24" className={className} fill="none">
         <rect width="24" height="24" rx="6" fill="#1E293B" />
@@ -295,21 +469,8 @@ export const ServiceAppLogo: React.FC<{
     );
   }
 
-  // 7. WhatsApp
-  if (text.includes('whatsapp') || text.includes('واتساب') || text.includes('واتس')) {
-    return (
-      <svg viewBox="0 0 24 24" className={className} fill="none">
-        <rect width="24" height="24" rx="6" fill="#25D366" />
-        <path
-          d="M12 4.5A7.5 7.5 0 0 0 5.5 15.8L4.5 19.5l3.8-1a7.5 7.5 0 1 0 3.7-14zm3.9 10.6c-.2.5-.9 1-1.4 1.1-.4 0-.8.2-2.7-.6-2.2-.9-3.7-3.2-3.8-3.4-.1-.1-.9-1.2-.9-2.3s.6-1.6.8-1.8c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .5.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .5s-.2.3-.3.4l-.4.5c-.1.1-.3.3-.1.6.2.4.9 1.5 2 2.4 1.3 1.1 2.4 1.5 2.8 1.6.3.1.5.1.7-.1.2-.2.8-1 .1-1.3.2-.3.4-.2.6-.1l1.8.9c.2.1.4.2.5.3.1.3.1.8-.1 1.3z"
-          fill="#FFFFFF"
-        />
-      </svg>
-    );
-  }
-
-  // 8. Kwai
-  if (text.includes('kwai') || text.includes('كواي')) {
+  // 19. Kwai
+  if (categoryId === 'cat_kwai' || text.includes('kwai') || text.includes('كواي')) {
     return (
       <svg viewBox="0 0 24 24" className={className} fill="none">
         <rect width="24" height="24" rx="6" fill="#FF6E00" />
@@ -318,33 +479,7 @@ export const ServiceAppLogo: React.FC<{
     );
   }
 
-  // 9. Spotify
-  if (text.includes('spotify') || text.includes('سبوتيفاي')) {
-    return (
-      <svg viewBox="0 0 24 24" className={className} fill="none">
-        <rect width="24" height="24" rx="6" fill="#1DB954" />
-        <path
-          d="M16.5 15.6c-.2.3-.5.4-.8.2-2.2-1.3-4.9-1.6-8.2-.9-.3.1-.6-.1-.7-.4-.1-.3.1-.6.4-.7 3.5-.8 6.5-.4 9 1.1.3.2.4.5.3.7zm1.1-2.5c-.2.3-.6.4-.9.2-2.5-1.5-6.3-2-9.2-1.1-.4.1-.8-.1-.9-.5-.1-.4.1-.8.5-.9 3.4-1 7.6-.5 10.3 1.2.4.2.5.7.2 1.1zm.1-2.6C14.7 8.7 9.8 8.5 7 9.4c-.5.1-.9-.1-1.1-.6-.1-.5.1-.9.6-1.1 3.3-1 8.7-.8 12.1 1.2.4.2.6.8.3 1.2-.2.4-.7.6-1.2.4z"
-          fill="#FFFFFF"
-        />
-      </svg>
-    );
-  }
-
-  // 10. LinkedIn
-  if (text.includes('linkedin') || text.includes('لينكد')) {
-    return (
-      <svg viewBox="0 0 24 24" className={className} fill="none">
-        <rect width="24" height="24" rx="6" fill="#0A66C2" />
-        <path
-          d="M8.5 17h-2v-7h2v7zm-1-8a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4zm10 8h-2v-3.7c0-1.1-.4-1.8-1.4-1.8-.8 0-1.2.5-1.4 1v4.5h-2s.03-6.3 0-7h2v1c.3-.4.9-1.1 2.1-1.1 1.5 0 2.7 1 2.7 3.2V17z"
-          fill="#FFFFFF"
-        />
-      </svg>
-    );
-  }
-
-  // 11. Twitch & Kick
+  // 20. Twitch & Kick
   if (text.includes('kick') || text.includes('كيك')) {
     return (
       <svg viewBox="0 0 24 24" className={className} fill="none">
@@ -353,7 +488,7 @@ export const ServiceAppLogo: React.FC<{
       </svg>
     );
   }
-  if (text.includes('twitch') || text.includes('تويتش')) {
+  if (categoryId === 'cat_twitch_kick' || text.includes('twitch') || text.includes('تويتش')) {
     return (
       <svg viewBox="0 0 24 24" className={className} fill="none">
         <rect width="24" height="24" rx="6" fill="#9146FF" />
@@ -362,7 +497,7 @@ export const ServiceAppLogo: React.FC<{
     );
   }
 
-  // 12. Fallback to category PlatformLogo
+  // 21. Default Category Fallback
   return <PlatformLogo categoryId={categoryId} className={className} />;
 };
 
@@ -1411,35 +1546,126 @@ export const ServicesView: React.FC<ServicesViewProps> = ({
             <p className="font-bold text-slate-300">لا توجد خدمات مطابقة لهذا التصنيف حالياً</p>
             <p className="text-[11px]">اختر قسماً آخر مثل "كل الباقات" أو اختر لعبة/منصة أخرى.</p>
           </div>
+        ) : isCurrentCategoryGaming ? (
+          /* ========================================================================= */
+          /* GAMING PACKAGES GRID (HIGH APPEAL 3-COLUMN GAMER DISPLAY)                */
+          /* ========================================================================= */
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-4">
+            {filteredServices.map((service) => {
+              const isUnavailable = !service.active || service.isAvailable === false;
+              return (
+                <div
+                  key={service.id}
+                  className={`relative overflow-hidden rounded-2xl bg-gradient-to-b from-slate-900/95 to-slate-950 border transition-all flex flex-col justify-between group shadow-lg ${
+                    isUnavailable
+                      ? 'border-rose-900/40 opacity-80'
+                      : 'border-amber-500/20 hover:border-amber-400/60 hover:shadow-amber-500/10 hover:-translate-y-0.5'
+                  }`}
+                >
+                  {/* Subtle Top Glowing Bar */}
+                  <div className="h-1 w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 opacity-80 group-hover:opacity-100 transition-opacity" />
+
+                  <div className="p-4 sm:p-4.5 space-y-3 flex-1 flex flex-col">
+                    {/* Top Row: Authentic Game Logo & Service Badges */}
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-slate-950/90 border border-amber-500/30 p-1.5 shrink-0 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
+                        <ServiceAppLogo serviceName={service.name} categoryId={service.categoryId} className="w-full h-full object-contain" />
+                      </div>
+
+                      <div className="flex flex-col items-end gap-1 flex-1">
+                        <span className="text-[10px] px-2 py-0.5 rounded-md font-bold border flex items-center gap-1 bg-amber-500/10 text-amber-300 border-amber-500/30">
+                          <Zap className="w-3 h-3 text-amber-400" />
+                          <span>شحن فوري بالـ ID</span>
+                        </span>
+                        <span className="text-[10px] text-slate-500 font-mono">
+                          #{service.providerServiceId}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Title & Description */}
+                    <div className="space-y-1 flex-1">
+                      <h3 className="text-sm font-black text-white group-hover:text-amber-300 transition-colors leading-snug line-clamp-2">
+                        {service.name}
+                      </h3>
+                      <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">
+                        {service.description || 'شحن رسمي ومباشر لحسابك داخل اللعبة عبر المعرف ID فقط بدون كلمة سر.'}
+                      </p>
+                    </div>
+
+                    {/* Speed & Guarantee Tags */}
+                    <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+                      <span className="flex items-center gap-1 text-emerald-400 font-medium">
+                        <Check className="w-3 h-3" />
+                        <span>رسمي وآمن 100%</span>
+                      </span>
+                      <span className="flex items-center gap-1 text-cyan-400 font-mono">
+                        <Clock className="w-3 h-3" />
+                        <span>{service.speed || 'فوري 1-5 د'}</span>
+                      </span>
+                    </div>
+
+                    {/* Pricing & CTA */}
+                    <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
+                      <div className="text-right">
+                        <span className="text-[10px] text-slate-400 block">سعر الباقة</span>
+                        <div className="text-lg sm:text-xl font-black text-amber-400 font-mono leading-none">
+                          {service.pricePer1000.toFixed(2)} <span className="text-xs text-amber-300">ج.م</span>
+                        </div>
+                      </div>
+
+                      {isUnavailable ? (
+                        <button
+                          disabled
+                          className="px-3.5 py-2 rounded-xl text-slate-400 bg-slate-800/80 border border-slate-700/60 font-bold text-xs cursor-not-allowed opacity-60 flex items-center gap-1"
+                        >
+                          <X className="w-3.5 h-3.5 text-rose-400" />
+                          <span>غير متوفر</span>
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handleOpenOrder(service)}
+                          className="px-4 py-2 rounded-xl text-white font-black text-xs bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 shadow-md shadow-amber-600/30 flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all"
+                        >
+                          <Zap className="w-3.5 h-3.5 text-amber-200" />
+                          <span>اشحن الآن</span>
+                          <ChevronLeft className="w-3.5 h-3.5" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         ) : (
-          filteredServices.map((service) => {
-            const isPackage = service.type === 'package' || isCurrentCategoryGaming;
-            const isUnavailable = !service.active || service.isAvailable === false;
-            return (
-              <div
-                key={service.id}
-                className={`p-3.5 sm:p-5 rounded-2xl bg-slate-900 hover:bg-slate-850 border transition-all shadow-md ${
-                  isUnavailable ? 'border-rose-900/50 opacity-90' : 'border-slate-800 hover:border-slate-700'
-                }`}
-              >
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3.5">
-                  
-                  {/* Service Details with Authentic App/Game Logo */}
-                  <div className="flex items-start gap-3 sm:gap-4 flex-1">
-                    <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-2xl bg-slate-950/90 border border-slate-800 p-2 shrink-0 flex items-center justify-center shadow-md group-hover:border-slate-700">
+          /* ========================================================================= */
+          /* SOCIAL MEDIA & SUBSCRIPTIONS GRID (SLEEK CYBER CARDS)                     */
+          /* ========================================================================= */
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-3.5">
+            {filteredServices.map((service) => {
+              const isPackage = service.type === 'package';
+              const isUnavailable = !service.active || service.isAvailable === false;
+              return (
+                <div
+                  key={service.id}
+                  className={`p-4 sm:p-5 rounded-2xl bg-slate-900/90 hover:bg-slate-850/90 border transition-all flex flex-col justify-between shadow-md ${
+                    isUnavailable
+                      ? 'border-rose-900/40 opacity-80'
+                      : 'border-slate-800 hover:border-indigo-500/40 hover:shadow-lg'
+                  }`}
+                >
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    {/* Platform Brand Icon */}
+                    <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-slate-950/90 border border-slate-800 p-2 shrink-0 flex items-center justify-center shadow-md">
                       <ServiceAppLogo serviceName={service.name} categoryId={service.categoryId} className="w-full h-full object-contain" />
                     </div>
 
-                    <div className="space-y-1.5 flex-1">
-                      <div className="flex items-center gap-2 flex-wrap">
-                        <span
-                          className={`text-[11px] px-2.5 py-0.5 rounded-lg font-bold border flex items-center gap-1.5 ${
-                            isCurrentCategoryGaming
-                              ? 'bg-amber-500/10 text-amber-300 border-amber-500/30'
-                              : 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
-                          }`}
-                        >
-                          <PlatformLogo categoryId={service.categoryId} className="w-3.5 h-3.5" />
+                    {/* Details */}
+                    <div className="space-y-1.5 flex-1 min-w-0">
+                      <div className="flex items-center gap-1.5 flex-wrap">
+                        <span className="text-[10px] px-2 py-0.5 rounded-md font-bold bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 flex items-center gap-1">
+                          <PlatformLogo categoryId={service.categoryId} className="w-3 h-3" />
                           <span>{currentCategoryName}</span>
                         </span>
 
@@ -1450,117 +1676,75 @@ export const ServicesView: React.FC<ServicesViewProps> = ({
                         {isUnavailable ? (
                           <span className="text-[10px] bg-rose-500/20 text-rose-300 px-2 py-0.5 rounded-md border border-rose-500/40 font-bold flex items-center gap-1">
                             <AlertTriangle className="w-3 h-3 text-rose-400" />
-                            <span>غير متوفر حالياً ❌</span>
+                            <span>غير متوفر</span>
                           </span>
                         ) : service.isAccountSale ? (
                           <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-md border border-emerald-500/40 font-bold flex items-center gap-1">
                             <Sparkles className="w-3 h-3 text-emerald-400" />
-                            <span>حساب حقيقي 100% بدون أي تزويد</span>
-                          </span>
-                        ) : isPackage ? (
-                          <span className="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-md border border-amber-500/30 font-bold flex items-center gap-1">
-                            <Tag className="w-3 h-3" />
-                            <span>باقة شحن ألعاب</span>
+                            <span>حساب حقيقي 100%</span>
                           </span>
                         ) : (
-                          <span className="text-[10px] bg-indigo-500/10 text-indigo-300 px-2 py-0.5 rounded-md border border-indigo-500/20 font-bold flex items-center gap-1">
+                          <span className="text-[10px] bg-emerald-500/10 text-emerald-300 px-2 py-0.5 rounded-md border border-emerald-500/20 font-bold flex items-center gap-1">
                             <ShieldCheck className="w-3 h-3 text-emerald-400" />
-                            <span>خدمة فورية ومضمونة</span>
+                            <span>مضمون وسريع</span>
                           </span>
                         )}
                       </div>
 
-                      <h3 className="text-xs sm:text-sm font-bold text-white leading-snug">
+                      <h3 className="text-xs sm:text-sm font-bold text-white leading-snug line-clamp-2">
                         {service.name}
                       </h3>
-                      <p className="text-[11px] text-slate-400 leading-relaxed">
+                      <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">
                         {service.description}
                       </p>
-
-                      {isUnavailable && (
-                        <div className="mt-2 p-2 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-black flex items-center gap-1.5">
-                          <AlertTriangle className="w-3.5 h-3.5 text-rose-400 shrink-0" />
-                          <span>غير متوفر ومينفعش يطلب</span>
-                        </div>
-                      )}
                     </div>
                   </div>
 
-                  {/* Pricing in EGP & Order CTA */}
-                  <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 shrink-0 border-t sm:border-t-0 pt-2.5 sm:pt-0 border-slate-800">
+                  {/* Bottom Row: Specs, Price & CTA */}
+                  <div className="mt-3.5 pt-3 border-t border-slate-800/80 flex items-center justify-between gap-3">
                     <div className="text-right">
                       <div className="text-[10px] text-slate-400">
-                        {service.isAccountSale ? 'سعر الحساب كاملاً' : isPackage ? 'سعر الباقة كاملة' : 'السعر لكل 1,000'}
+                        {service.isAccountSale ? 'سعر الحساب' : isPackage ? 'سعر الباقة' : 'السعر لكل 1,000'}
                       </div>
-                      <div className="flex items-baseline gap-2 flex-wrap sm:justify-end">
-                        <span className="text-lg sm:text-xl font-black text-amber-400 font-mono">
-                          {service.pricePer1000.toFixed(2)} ج.م
-                        </span>
-                      </div>
-                      <div className="text-[10px] text-slate-400">
-                        {isUnavailable
-                          ? 'غير متاح للطلب حالياً'
-                          : service.isAccountSale
-                          ? 'تسليم فوري ومباشر'
-                          : isPackage
-                          ? 'شحن فوري بالـ ID'
-                          : `الحد الأدنى: ${(service.minQuantity || 1).toLocaleString()}`}
+                      <div className="text-base sm:text-lg font-black text-amber-400 font-mono leading-none">
+                        {service.pricePer1000.toFixed(2)} <span className="text-xs text-amber-300">ج.م</span>
                       </div>
                     </div>
 
-                    {isUnavailable ? (
-                      <div className="flex flex-col items-center sm:items-end gap-1">
+                    <div className="flex items-center gap-2">
+                      <div className="hidden sm:flex flex-col items-end text-[10px] text-slate-400 font-mono">
+                        <span>الحد: {service.minQuantity || 1} - {(service.maxQuantity || 1000).toLocaleString()}</span>
+                        <span className="text-cyan-400">⚡ {service.speed || 'تسليم فوري'}</span>
+                      </div>
+
+                      {isUnavailable ? (
                         <button
                           disabled
-                          className="px-4 py-2.5 rounded-xl text-slate-400 bg-slate-800/80 border border-slate-700/60 font-black text-xs cursor-not-allowed opacity-60 flex items-center gap-1.5"
+                          className="px-3 py-2 rounded-xl text-slate-400 bg-slate-800/80 border border-slate-700/60 font-bold text-xs cursor-not-allowed opacity-60 flex items-center gap-1"
                         >
                           <X className="w-3.5 h-3.5 text-rose-400" />
                           <span>غير متوفر</span>
                         </button>
-                        <span className="text-[10px] text-rose-400 font-bold">غير متوفر ومينفعش يطلب</span>
-                      </div>
-                    ) : (
-                      <button
-                        onClick={() => handleOpenOrder(service)}
-                        className={`px-4 py-2.5 rounded-xl text-white font-black text-xs transition-all shadow-md flex items-center gap-1.5 cursor-pointer active:scale-95 ${
-                          service.isAccountSale
-                            ? 'bg-emerald-600 hover:bg-emerald-500 shadow-emerald-600/30'
-                            : isCurrentCategoryGaming
-                            ? 'bg-amber-600 hover:bg-amber-500 shadow-amber-600/30'
-                            : 'bg-indigo-600 hover:bg-indigo-500 shadow-indigo-600/30'
-                        }`}
-                      >
-                        <Zap className="w-3.5 h-3.5 text-amber-300" />
-                        <span>{service.isAccountSale ? 'شراء الحساب الآن' : isPackage ? 'شحن الباقة الآن' : 'طلب الخدمة'}</span>
-                        <ChevronLeft className="w-3.5 h-3.5" />
-                      </button>
-                    )}
-                  </div>
-
-                </div>
-
-                {/* Bottom Metadata */}
-                <div className="mt-3 pt-2.5 border-t border-slate-800 flex items-center justify-between text-[10px] sm:text-[11px] text-slate-400">
-                  <div className="flex items-center gap-1">
-                    <Clock className="w-3 h-3 text-cyan-400" />
-                    <span>السرعة: {service.speed}</span>
-                  </div>
-                  <div className="flex items-center gap-2 font-mono">
-                    {isPackage ? (
-                      <span className="text-emerald-400 font-bold">باقة جاهزة للشحن الفوري</span>
-                    ) : (
-                      <>
-                        <span>الحد الأدنى: <strong className="text-slate-200">{service.minQuantity}</strong></span>
-                        <span>•</span>
-                        <span>الحد الأقصى: <strong className="text-slate-200">{service.maxQuantity.toLocaleString()}</strong></span>
-                      </>
-                    )}
+                      ) : (
+                        <button
+                          onClick={() => handleOpenOrder(service)}
+                          className={`px-3.5 py-2 rounded-xl text-white font-black text-xs transition-all shadow-md flex items-center gap-1.5 cursor-pointer active:scale-95 ${
+                            service.isAccountSale
+                              ? 'bg-emerald-600 hover:bg-emerald-500 shadow-emerald-600/30'
+                              : 'bg-indigo-600 hover:bg-indigo-500 shadow-indigo-600/30'
+                          }`}
+                        >
+                          <Zap className="w-3.5 h-3.5 text-amber-300" />
+                          <span>{service.isAccountSale ? 'شراء الحساب' : isPackage ? 'شحن الباقة' : 'طلب الخدمة'}</span>
+                          <ChevronLeft className="w-3.5 h-3.5" />
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
-
-              </div>
-            );
-          })
+              );
+            })}
+          </div>
         )}
       </div>
 
@@ -1591,11 +1775,11 @@ export const ServicesView: React.FC<ServicesViewProps> = ({
               </button>
             </div>
 
-            {/* FINANCIAL TRANSPARENCY NOTICE */}
+            {/* FINANCIAL GUARANTEE NOTICE */}
             <div className="p-3.5 rounded-2xl bg-gradient-to-r from-indigo-950/80 to-slate-950 border border-indigo-500/40 space-y-2 text-xs">
               <div className="flex items-center gap-2 text-indigo-300 font-bold">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>تفاصيل الرسوم والشفافية المالية بالجنيه المصري:</span>
+                <span>ضمان أفضل سعر وتنفيذ مباشر بالجنيه المصري:</span>
               </div>
               
               <div className="grid grid-cols-2 gap-2 text-[11px] pt-1">
