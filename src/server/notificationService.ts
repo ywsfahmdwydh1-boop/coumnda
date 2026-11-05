@@ -30,7 +30,8 @@ export function sendRealtimeNotification(
   type: NotificationType,
   title: string,
   message: string,
-  link?: string
+  link?: string,
+  extra?: Partial<AppNotification>
 ): AppNotification {
   const db = getDatabase();
   if (!db.notifications) {
@@ -46,6 +47,7 @@ export function sendRealtimeNotification(
     link,
     read: false,
     createdAt: new Date().toISOString(),
+    ...extra,
   };
 
   db.notifications.unshift(notification);
@@ -403,7 +405,14 @@ export function notifyOrderStatusChange(
   orderNumber: string,
   serviceName: string,
   newStatus: string,
-  adminNotes?: string
+  adminNotes?: string,
+  orderDetails?: {
+    orderId?: string;
+    serviceId?: string;
+    link?: string;
+    quantity?: number;
+    charge?: number;
+  }
 ) {
   let statusArabic = newStatus;
   if (newStatus === 'completed') statusArabic = 'مكتمل بنجاح ✅';
@@ -411,6 +420,8 @@ export function notifyOrderStatusChange(
   else if (newStatus === 'canceled') statusArabic = 'ملغي ❌';
   else if (newStatus === 'refunded') statusArabic = 'مسترد لرصيدك 🔄';
   else if (newStatus === 'partial') statusArabic = 'مكتمل جزئياً ⏳';
+
+  const isRetryable = newStatus === 'canceled' || newStatus === 'refunded';
 
   // 1. External SMS / Phone notification to customer
   const customerPhoneOrEmail = user.phone || user.email;
@@ -424,13 +435,36 @@ export function notifyOrderStatusChange(
     'order_status',
     `تحديث حالة الطلب (#${orderNumber}) 🔔`,
     notifMsg,
-    '/orders'
+    '/orders',
+    {
+      orderId: orderDetails?.orderId,
+      orderNumber,
+      orderStatus: newStatus,
+      serviceId: orderDetails?.serviceId,
+      serviceName,
+      target: orderDetails?.link,
+      quantity: orderDetails?.quantity,
+      charge: orderDetails?.charge,
+      retryable: isRetryable,
+    }
   );
 
   // 3. WebSocket Event Broadcast for instant UI sync and native push
   const statusEventPayload = JSON.stringify({
     event: 'order_status_change',
-    data: { orderNumber, serviceName, newStatus, adminNotes, userId: user.id },
+    data: {
+      orderId: orderDetails?.orderId,
+      orderNumber,
+      serviceName,
+      serviceId: orderDetails?.serviceId,
+      newStatus,
+      adminNotes,
+      userId: user.id,
+      target: orderDetails?.link,
+      quantity: orderDetails?.quantity,
+      charge: orderDetails?.charge,
+      retryable: isRetryable,
+    },
   });
   activeClients.forEach((sockets) => {
     sockets.forEach((ws) => {

@@ -843,7 +843,13 @@ app.post('/api/orders/:id/cancel', authenticate, (req: Request, res: Response) =
 
   saveDatabase(db);
 
-  notifyOrderStatusChange(user, order.orderNumber, order.serviceName, 'canceled');
+  notifyOrderStatusChange(user, order.orderNumber, order.serviceName, 'canceled', undefined, {
+    orderId: order.id,
+    serviceId: order.serviceId,
+    link: order.link,
+    quantity: order.quantity,
+    charge: order.charge,
+  });
 
   return res.json({
     success: true,
@@ -1102,7 +1108,13 @@ app.patch('/api/admin/orders/:id/status', authenticate, requireAdmin, (req: Requ
     order.status = status;
     const user = db.users.find((u) => u.id === order.userId);
     if (user) {
-      notifyOrderStatusChange(user, order.orderNumber, order.serviceName, status, adminNotes);
+      notifyOrderStatusChange(user, order.orderNumber, order.serviceName, status, adminNotes, {
+        orderId: order.id,
+        serviceId: order.serviceId,
+        link: order.link,
+        quantity: order.quantity,
+        charge: order.charge,
+      });
     }
   }
 
@@ -1205,7 +1217,13 @@ app.post('/api/admin/orders/:id/refund', authenticate, requireAdmin, (req: Reque
   db.transactions.unshift(transaction);
   saveDatabase(db);
 
-  notifyOrderStatusChange(user, order.orderNumber, order.serviceName, 'refunded');
+  notifyOrderStatusChange(user, order.orderNumber, order.serviceName, 'refunded', reason, {
+    orderId: order.id,
+    serviceId: order.serviceId,
+    link: order.link,
+    quantity: order.quantity,
+    charge: order.charge,
+  });
 
   return res.json({ success: true, message: `تم استرداد مبلغ $${refund.toFixed(3)} بنجاح للمستخدم`, order, userBalance: user.balance });
 });

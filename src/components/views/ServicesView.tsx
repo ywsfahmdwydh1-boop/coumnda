@@ -36,9 +36,13 @@ import {
   Megaphone,
 } from 'lucide-react';
 
+import { RetryOrderData } from '../../context/NotificationContext.tsx';
+
 interface ServicesViewProps {
   onNavigateToWallet: () => void;
   onNavigateToOrders: () => void;
+  retryOrderData?: RetryOrderData | null;
+  onClearRetryOrder?: () => void;
 }
 
 // Gaming category IDs helper
@@ -206,6 +210,160 @@ export const PlatformLogo: React.FC<{ categoryId: string; className?: string }> 
     default:
       return <Layers className={className} />;
   }
+};
+
+// ============================================================================
+// Authentic Individual Service & App Logo (ChatGPT, Canva, CapCut, Games, etc.)
+// ============================================================================
+export const ServiceAppLogo: React.FC<{
+  serviceName: string;
+  categoryId: string;
+  className?: string;
+}> = ({ serviceName, categoryId, className = 'w-6 h-6' }) => {
+  const text = (serviceName + ' ' + categoryId).toLowerCase();
+
+  // 1. ChatGPT / OpenAI
+  if (text.includes('gpt') || text.includes('chatgpt') || text.includes('شات') || text.includes('جي بي تي')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#10A37F" />
+        <path
+          d="M18.8 11.2a3.8 3.8 0 0 0-.3-2.9 3.9 3.9 0 0 0-3.6-1.9h-.7a3.8 3.8 0 0 0-2.4-1.5 3.9 3.9 0 0 0-4 1.4 3.8 3.8 0 0 0-2.3 1.8 3.9 3.9 0 0 0 .4 4.3 3.8 3.8 0 0 0 .3 2.9 3.9 3.9 0 0 0 3.6 1.9h.7a3.8 3.8 0 0 0 2.4 1.5 3.9 3.9 0 0 0 4-1.4 3.8 3.8 0 0 0 2.3-1.8 3.9 3.9 0 0 0-.4-4.3zm-6.8 6.7a2.6 2.6 0 0 1-1.6-.5l2.4-1.4a.7.7 0 0 0 .3-.6v-3.3l1-.6 2.3 1.3v2.8a2.6 2.6 0 0 1-4.4 2.3zm-4.7-2a2.6 2.6 0 0 1-.3-1.6v-2.8l2.4 1.4a.7.7 0 0 0 .7 0l2.9-1.7v1.2l-2.4 1.4-2.4 1.4a2.6 2.6 0 0 1-.9.7zm-1-5.1a2.6 2.6 0 0 1 1.3-1.1l-.1 2.8a.7.7 0 0 0 .3.6l2.9 1.7-1 .6-2.4-1.4-1-3.2zm6.6-1.9l-2.3-1.3v-2.8a2.6 2.6 0 0 1 4.5-.7l-2.2 1.3a.7.7 0 0 0-.3.6l.3 2.9zm3.7 2.6a2.6 2.6 0 0 1 .3 1.6v2.8l-2.4-1.4a.7.7 0 0 0-.7 0l-2.9 1.7v-1.2l2.4-1.4 2.4-1.4a2.6 2.6 0 0 1 .9-.7zm-1.8 1.1l-2.9-1.7 1-.6 2.4 1.4 1 3.2a2.6 2.6 0 0 1-1.2-1.7l-.3-.6z"
+          fill="#FFFFFF"
+        />
+      </svg>
+    );
+  }
+
+  // 2. Canva Pro
+  if (text.includes('canva') || text.includes('كانفا')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#00C4CC" />
+        <path
+          d="M12 4C7.58 4 4 7.58 4 12s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm2.2 11.2c-.8.8-1.9 1.2-3.1 1.2-2.4 0-4.1-1.7-4.1-4.2s1.7-4.2 4.1-4.2c1.1 0 2.1.4 2.8 1.1l-1.1 1.1c-.4-.4-1-.7-1.7-.7-1.5 0-2.5 1.1-2.5 2.7s1 2.7 2.5 2.7c.7 0 1.3-.3 1.7-.7l1.4 1z"
+          fill="#FFFFFF"
+        />
+      </svg>
+    );
+  }
+
+  // 3. CapCut Pro
+  if (text.includes('capcut') || text.includes('كاب كات') || text.includes('كابكات')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#000000" stroke="#334155" strokeWidth="1" />
+        <path d="M5 8l7-4 7 4-7 4-7-4zm0 8l7-4 7 4-7 4-7-4z" fill="#FFFFFF" />
+      </svg>
+    );
+  }
+
+  // 4. VPN
+  if (text.includes('vpn') || text.includes('في بي ان')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#1E3A8A" />
+        <path
+          d="M12 4L4 7v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V7l-8-3zm0 4a3 3 0 0 1 3 3c0 1.3-.8 2.4-2 2.8V16h-2v-2.2A3 3 0 0 1 9 11a3 3 0 0 1 3-3z"
+          fill="#60A5FA"
+        />
+      </svg>
+    );
+  }
+
+  // 5. Discord
+  if (text.includes('discord') || text.includes('دسكورد') || text.includes('ديسكورد')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#5865F2" />
+        <path
+          d="M18.8 6.5A15.3 15.3 0 0 0 15 5.3a.1.1 0 0 0-.1 0 10.6 10.6 0 0 0-.5 1 14.2 14.2 0 0 0-4.8 0 10.6 10.6 0 0 0-.5-1 .1.1 0 0 0-.1 0 15.3 15.3 0 0 0-3.8 1.2.1.1 0 0 0 0 .1C3 11 3.7 15.3 5.4 18.2a.1.1 0 0 0 .1 0 15.4 15.4 0 0 0 4.6 2.3.1.1 0 0 0 .1 0c.4-.5.7-1 1-1.6a.1.1 0 0 0-.1-.1 10.1 10.1 0 0 1-1.4-.7.1.1 0 0 1 0-.2c.1-.1.2-.2.3-.2a11 11 0 0 0 9.8 0 .1.1 0 0 1 .3.2.1.1 0 0 1 0 .2 10.2 10.2 0 0 1-1.4.7.1.1 0 0 0-.1.1c.3.5.7 1.1 1 1.6a.1.1 0 0 0 .1 0 15.4 15.4 0 0 0 4.7-2.3.1.1 0 0 0 .1 0c1.9-3.4 1.3-7.7-.3-11.7a.1.1 0 0 0 0-.1zM9.5 14.8c-.9 0-1.6-.8-1.6-1.8s.7-1.8 1.6-1.8c.9 0 1.6.8 1.6 1.8s-.7 1.8-1.6 1.8zm5 0c-.9 0-1.6-.8-1.6-1.8s.7-1.8 1.6-1.8c.9 0 1.6.8 1.6 1.8s-.7 1.8-1.6 1.8z"
+          fill="#FFFFFF"
+        />
+      </svg>
+    );
+  }
+
+  // 6. Google Maps Reviews
+  if (text.includes('google') || text.includes('جوجل') || text.includes('خرائط') || text.includes('تقييم')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#1E293B" />
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335" />
+        <circle cx="12" cy="9" r="2.5" fill="#FFFFFF" />
+      </svg>
+    );
+  }
+
+  // 7. WhatsApp
+  if (text.includes('whatsapp') || text.includes('واتساب') || text.includes('واتس')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#25D366" />
+        <path
+          d="M12 4.5A7.5 7.5 0 0 0 5.5 15.8L4.5 19.5l3.8-1a7.5 7.5 0 1 0 3.7-14zm3.9 10.6c-.2.5-.9 1-1.4 1.1-.4 0-.8.2-2.7-.6-2.2-.9-3.7-3.2-3.8-3.4-.1-.1-.9-1.2-.9-2.3s.6-1.6.8-1.8c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .5.4.2.5.7 1.8.8 1.9.1.1.1.3 0 .5s-.2.3-.3.4l-.4.5c-.1.1-.3.3-.1.6.2.4.9 1.5 2 2.4 1.3 1.1 2.4 1.5 2.8 1.6.3.1.5.1.7-.1.2-.2.8-1 .1-1.3.2-.3.4-.2.6-.1l1.8.9c.2.1.4.2.5.3.1.3.1.8-.1 1.3z"
+          fill="#FFFFFF"
+        />
+      </svg>
+    );
+  }
+
+  // 8. Kwai
+  if (text.includes('kwai') || text.includes('كواي')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#FF6E00" />
+        <path d="M12 6a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm-1 8.5v-5l4.5 2.5-4.5 2.5z" fill="#FFFFFF" />
+      </svg>
+    );
+  }
+
+  // 9. Spotify
+  if (text.includes('spotify') || text.includes('سبوتيفاي')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#1DB954" />
+        <path
+          d="M16.5 15.6c-.2.3-.5.4-.8.2-2.2-1.3-4.9-1.6-8.2-.9-.3.1-.6-.1-.7-.4-.1-.3.1-.6.4-.7 3.5-.8 6.5-.4 9 1.1.3.2.4.5.3.7zm1.1-2.5c-.2.3-.6.4-.9.2-2.5-1.5-6.3-2-9.2-1.1-.4.1-.8-.1-.9-.5-.1-.4.1-.8.5-.9 3.4-1 7.6-.5 10.3 1.2.4.2.5.7.2 1.1zm.1-2.6C14.7 8.7 9.8 8.5 7 9.4c-.5.1-.9-.1-1.1-.6-.1-.5.1-.9.6-1.1 3.3-1 8.7-.8 12.1 1.2.4.2.6.8.3 1.2-.2.4-.7.6-1.2.4z"
+          fill="#FFFFFF"
+        />
+      </svg>
+    );
+  }
+
+  // 10. LinkedIn
+  if (text.includes('linkedin') || text.includes('لينكد')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#0A66C2" />
+        <path
+          d="M8.5 17h-2v-7h2v7zm-1-8a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4zm10 8h-2v-3.7c0-1.1-.4-1.8-1.4-1.8-.8 0-1.2.5-1.4 1v4.5h-2s.03-6.3 0-7h2v1c.3-.4.9-1.1 2.1-1.1 1.5 0 2.7 1 2.7 3.2V17z"
+          fill="#FFFFFF"
+        />
+      </svg>
+    );
+  }
+
+  // 11. Twitch & Kick
+  if (text.includes('kick') || text.includes('كيك')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#000000" stroke="#53FC18" strokeWidth="1" />
+        <path d="M7 5h3v5.5l3.5-5.5h3.5L12.5 12l5 7h-3.7L10 13.5V19H7V5z" fill="#53FC18" />
+      </svg>
+    );
+  }
+  if (text.includes('twitch') || text.includes('تويتش')) {
+    return (
+      <svg viewBox="0 0 24 24" className={className} fill="none">
+        <rect width="24" height="24" rx="6" fill="#9146FF" />
+        <path d="M6 5l-1.5 3.5v10.5h3.5v2h2l2-2h2.5l4.5-4.5V5H6zm10.5 8l-2.5 2.5h-3l-2 2v-2H7.5V6.5h9v6.5zm-5-3.5h1.5v3.5H11.5V9.5zm3.5 0h1.5v3.5H15V9.5z" fill="#FFFFFF" />
+      </svg>
+    );
+  }
+
+  // 12. Fallback to category PlatformLogo
+  return <PlatformLogo categoryId={categoryId} className={className} />;
 };
 
 const getCategoryCardStyle = (catId: string, isSelected: boolean) => {
@@ -414,7 +572,12 @@ const getCategoryCardStyle = (catId: string, isSelected: boolean) => {
   }
 };
 
-export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigateToWallet, onNavigateToOrders }) => {
+export const ServicesView: React.FC<ServicesViewProps> = ({
+  onNavigateToWallet,
+  onNavigateToOrders,
+  retryOrderData,
+  onClearRetryOrder,
+}) => {
   const { user, token, updateBalanceLocally } = useAuth();
   const { notifications } = useNotifications();
   const { isInstallable, install } = usePWAInstall();
@@ -442,6 +605,41 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigateToWallet, 
   const [orderQuantity, setOrderQuantity] = useState<number>(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderFeedback, setOrderFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+  // Auto-open order modal if retryOrderData is provided ("مع إعادة المحاولة")
+  useEffect(() => {
+    if (!retryOrderData || services.length === 0) return;
+
+    let targetService = services.find((s) => s.id === retryOrderData.serviceId);
+    if (!targetService && retryOrderData.serviceName) {
+      const targetNameClean = retryOrderData.serviceName.trim().toLowerCase();
+      targetService = services.find(
+        (s) => s.name.trim().toLowerCase() === targetNameClean
+      );
+    }
+    if (!targetService && retryOrderData.serviceName) {
+      targetService = services.find(
+        (s) => s.name.includes(retryOrderData.serviceName!) || retryOrderData.serviceName!.includes(s.name)
+      );
+    }
+
+    if (targetService) {
+      setActiveOrderService(targetService);
+      setPlayerUidOrLink(retryOrderData.link || '');
+      setOrderQuantity(retryOrderData.quantity || 1);
+      if (GAMING_CAT_IDS.includes(targetService.categoryId)) {
+        setActiveCatalogMode('gaming');
+      } else {
+        setActiveCatalogMode('social');
+      }
+      setSelectedCategory(targetService.categoryId);
+      setOrderFeedback({
+        type: 'success',
+        message: `تم استرجاع بيانات الخدمة للطلب #${retryOrderData.orderNumber || ''} لإعادة المحاولة فوراً بنقرة واحدة! 🔄`,
+      });
+      onClearRetryOrder?.();
+    }
+  }, [retryOrderData, services, onClearRetryOrder]);
 
   // Fetch categories and services
   const fetchData = async () => {
@@ -1224,62 +1422,68 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigateToWallet, 
                   isUnavailable ? 'border-rose-900/50 opacity-90' : 'border-slate-800 hover:border-slate-700'
                 }`}
               >
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3.5">
                   
-                  {/* Service Details */}
-                  <div className="space-y-1.5 flex-1">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span
-                        className={`text-[11px] px-2.5 py-0.5 rounded-lg font-bold border flex items-center gap-1.5 ${
-                          isCurrentCategoryGaming
-                            ? 'bg-amber-500/10 text-amber-300 border-amber-500/30'
-                            : 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
-                        }`}
-                      >
-                        <PlatformLogo categoryId={service.categoryId} className="w-3.5 h-3.5" />
-                        <span>{currentCategoryName}</span>
-                      </span>
-
-                      <span className="text-[10px] text-slate-500 font-mono">
-                        #{service.providerServiceId}
-                      </span>
-
-                      {isUnavailable ? (
-                        <span className="text-[10px] bg-rose-500/20 text-rose-300 px-2 py-0.5 rounded-md border border-rose-500/40 font-bold flex items-center gap-1">
-                          <AlertTriangle className="w-3 h-3 text-rose-400" />
-                          <span>غير متوفر حالياً ❌</span>
-                        </span>
-                      ) : service.isAccountSale ? (
-                        <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-md border border-emerald-500/40 font-bold flex items-center gap-1">
-                          <Sparkles className="w-3 h-3 text-emerald-400" />
-                          <span>حساب حقيقي 100% بدون أي تزويد</span>
-                        </span>
-                      ) : isPackage ? (
-                        <span className="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-md border border-amber-500/30 font-bold flex items-center gap-1">
-                          <Tag className="w-3 h-3" />
-                          <span>باقة شحن ألعاب</span>
-                        </span>
-                      ) : (
-                        <span className="text-[10px] bg-indigo-500/10 text-indigo-300 px-2 py-0.5 rounded-md border border-indigo-500/20 font-bold flex items-center gap-1">
-                          <ShieldCheck className="w-3 h-3 text-emerald-400" />
-                          <span>خدمة فورية ومضمونة</span>
-                        </span>
-                      )}
+                  {/* Service Details with Authentic App/Game Logo */}
+                  <div className="flex items-start gap-3 sm:gap-4 flex-1">
+                    <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-2xl bg-slate-950/90 border border-slate-800 p-2 shrink-0 flex items-center justify-center shadow-md group-hover:border-slate-700">
+                      <ServiceAppLogo serviceName={service.name} categoryId={service.categoryId} className="w-full h-full object-contain" />
                     </div>
 
-                    <h3 className="text-xs sm:text-sm font-bold text-white leading-snug">
-                      {service.name}
-                    </h3>
-                    <p className="text-[11px] text-slate-400 leading-relaxed">
-                      {service.description}
-                    </p>
+                    <div className="space-y-1.5 flex-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span
+                          className={`text-[11px] px-2.5 py-0.5 rounded-lg font-bold border flex items-center gap-1.5 ${
+                            isCurrentCategoryGaming
+                              ? 'bg-amber-500/10 text-amber-300 border-amber-500/30'
+                              : 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
+                          }`}
+                        >
+                          <PlatformLogo categoryId={service.categoryId} className="w-3.5 h-3.5" />
+                          <span>{currentCategoryName}</span>
+                        </span>
 
-                    {isUnavailable && (
-                      <div className="mt-2 p-2 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-black flex items-center gap-1.5">
-                        <AlertTriangle className="w-3.5 h-3.5 text-rose-400 shrink-0" />
-                        <span>غير متوفر ومينفعش يطلب</span>
+                        <span className="text-[10px] text-slate-500 font-mono">
+                          #{service.providerServiceId}
+                        </span>
+
+                        {isUnavailable ? (
+                          <span className="text-[10px] bg-rose-500/20 text-rose-300 px-2 py-0.5 rounded-md border border-rose-500/40 font-bold flex items-center gap-1">
+                            <AlertTriangle className="w-3 h-3 text-rose-400" />
+                            <span>غير متوفر حالياً ❌</span>
+                          </span>
+                        ) : service.isAccountSale ? (
+                          <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-md border border-emerald-500/40 font-bold flex items-center gap-1">
+                            <Sparkles className="w-3 h-3 text-emerald-400" />
+                            <span>حساب حقيقي 100% بدون أي تزويد</span>
+                          </span>
+                        ) : isPackage ? (
+                          <span className="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-md border border-amber-500/30 font-bold flex items-center gap-1">
+                            <Tag className="w-3 h-3" />
+                            <span>باقة شحن ألعاب</span>
+                          </span>
+                        ) : (
+                          <span className="text-[10px] bg-indigo-500/10 text-indigo-300 px-2 py-0.5 rounded-md border border-indigo-500/20 font-bold flex items-center gap-1">
+                            <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                            <span>خدمة فورية ومضمونة</span>
+                          </span>
+                        )}
                       </div>
-                    )}
+
+                      <h3 className="text-xs sm:text-sm font-bold text-white leading-snug">
+                        {service.name}
+                      </h3>
+                      <p className="text-[11px] text-slate-400 leading-relaxed">
+                        {service.description}
+                      </p>
+
+                      {isUnavailable && (
+                        <div className="mt-2 p-2 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-black flex items-center gap-1.5">
+                          <AlertTriangle className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                          <span>غير متوفر ومينفعش يطلب</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   {/* Pricing in EGP & Order CTA */}
@@ -1372,7 +1576,7 @@ export const ServicesView: React.FC<ServicesViewProps> = ({ onNavigateToWallet, 
             {/* Top Close Button */}
             <div className="flex items-center justify-between border-b border-slate-800 pb-3">
               <div className="flex items-center gap-2 text-white font-black text-sm sm:text-base">
-                <PlatformLogo categoryId={activeOrderService.categoryId} className="w-5 h-5" />
+                <ServiceAppLogo serviceName={activeOrderService.name} categoryId={activeOrderService.categoryId} className="w-5 h-5 object-contain shrink-0" />
                 <span>
                   {isPackageItem ? 'شحن باقة لعبة: ' : 'شراء خدمة: '}
                   {activeOrderService.name}

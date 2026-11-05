@@ -22,6 +22,10 @@ import {
   BookOpen,
   Smartphone,
   Star,
+  RotateCcw,
+  CheckCircle2,
+  AlertTriangle,
+  Rocket,
 } from 'lucide-react';
 import { EmailModal } from './EmailModal.tsx';
 
@@ -43,6 +47,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
     dismissToast,
     pushPermission,
     requestPushPermission,
+    triggerRetryOrder,
+    connectionStatus,
+    manualRetryConnection,
   } = useNotifications();
 
   const [isNotifOpen, setIsNotifOpen] = useState(false);
@@ -278,6 +285,28 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
                           )}
                         </div>
 
+                        {/* Reconnection Status Banner ("مع إعادة المحاولة") */}
+                        {(connectionStatus === 'reconnecting' || connectionStatus === 'offline') && (
+                          <div className="p-2.5 bg-amber-500/15 border-b border-amber-500/30 flex items-center justify-between gap-2 text-xs text-amber-300">
+                            <div className="flex items-center gap-1.5">
+                              <RotateCcw className="w-3.5 h-3.5 animate-spin text-amber-400" />
+                              <span className="text-[11px] font-bold">
+                                {connectionStatus === 'reconnecting'
+                                  ? 'جارٍ استعادة الاتصال بالمزامنة...'
+                                  : 'تعذر الاتصال المباشر بالخادم'}
+                              </span>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={manualRetryConnection}
+                              className="px-2.5 py-1 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-[10px] transition-all cursor-pointer flex items-center gap-1 active:scale-95"
+                            >
+                              <RotateCcw className="w-3 h-3" />
+                              <span>إعادة المحاولة</span>
+                            </button>
+                          </div>
+                        )}
+
                         {/* Quick Push Notification Enable Bar */}
                         <div className="p-2.5 bg-indigo-950/40 border-b border-indigo-900/30 flex items-center justify-between gap-2">
                           <div className="flex items-center gap-1.5 text-[11px] text-slate-300">
@@ -294,41 +323,104 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, setCurrentTab, onOpe
                           </button>
                         </div>
 
-                        <div className="max-h-80 overflow-y-auto divide-y divide-slate-800/60 p-1">
+                        <div className="max-h-80 overflow-y-auto divide-y divide-slate-800/60 p-1.5 space-y-1">
                           {notifications.length === 0 ? (
                             <div className="p-8 text-center text-xs text-slate-500">
                               لا توجد إشعارات حتى الآن
                             </div>
                           ) : (
-                            notifications.map((notif) => (
-                              <button
-                                key={notif.id}
-                                onClick={() => handleNotificationClick(notif.id, notif.link)}
-                                className={`w-full text-right p-3 rounded-xl transition-all flex items-start gap-2.5 cursor-pointer ${
-                                  !notif.read ? 'bg-indigo-950/30 text-white' : 'hover:bg-slate-850 text-slate-300'
-                                }`}
-                              >
+                            notifications.map((notif) => {
+                              const isCompleted = notif.orderStatus === 'completed' || notif.title.includes('مكتمل');
+                              const isCanceled = notif.orderStatus === 'canceled' || notif.orderStatus === 'refunded' || notif.title.includes('ملغي') || notif.title.includes('تعذر');
+                              const isInProgress = notif.orderStatus === 'in_progress';
+                              const isRetryable = notif.retryable || isCanceled;
+
+                              return (
                                 <div
-                                  className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${
-                                    !notif.read ? 'bg-indigo-500 animate-ping' : 'bg-transparent'
+                                  key={notif.id}
+                                  className={`w-full text-right p-3 rounded-2xl transition-all border ${
+                                    !notif.read
+                                      ? 'bg-indigo-950/40 border-indigo-500/40 text-white'
+                                      : 'bg-slate-900/60 border-slate-800/80 text-slate-300 hover:bg-slate-850'
                                   }`}
-                                />
-                                <div className="flex-1 space-y-1">
-                                  <div className="flex items-center justify-between">
-                                    <h4 className="text-xs font-bold text-white">{notif.title}</h4>
-                                    <span className="text-[10px] text-slate-500 font-mono">
-                                      {new Date(notif.createdAt).toLocaleTimeString('ar-EG', {
-                                        hour: '2-digit',
-                                        minute: '2-digit',
-                                      })}
-                                    </span>
+                                >
+                                  <div className="flex items-start gap-2.5">
+                                    {/* Status Icon */}
+                                    <div
+                                      className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 border ${
+                                        isCompleted
+                                          ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/40'
+                                          : isCanceled
+                                          ? 'bg-rose-500/20 text-rose-400 border-rose-500/40'
+                                          : isInProgress
+                                          ? 'bg-cyan-500/20 text-cyan-400 border-cyan-500/40'
+                                          : 'bg-amber-500/20 text-amber-400 border-amber-500/40'
+                                      }`}
+                                    >
+                                      {isCompleted ? (
+                                        <CheckCircle2 className="w-4 h-4" />
+                                      ) : isCanceled ? (
+                                        <AlertTriangle className="w-4 h-4" />
+                                      ) : isInProgress ? (
+                                        <Rocket className="w-4 h-4" />
+                                      ) : (
+                                        <Bell className="w-4 h-4" />
+                                      )}
+                                    </div>
+
+                                    <div className="flex-1 space-y-1 min-w-0">
+                                      <div className="flex items-center justify-between gap-1">
+                                        <h4 className="text-xs font-bold text-white truncate">{notif.title}</h4>
+                                        <span className="text-[10px] text-slate-500 font-mono shrink-0">
+                                          {new Date(notif.createdAt).toLocaleTimeString('ar-EG', {
+                                            hour: '2-digit',
+                                            minute: '2-digit',
+                                          })}
+                                        </span>
+                                      </div>
+                                      <p className="text-[11px] text-slate-400 leading-relaxed">
+                                        {notif.message}
+                                      </p>
+
+                                      {/* Action Buttons: Retry & View */}
+                                      <div className="flex items-center gap-2 pt-2">
+                                        {isRetryable && (
+                                          <button
+                                            type="button"
+                                            onClick={(e) => {
+                                              e.stopPropagation();
+                                              markAsRead(notif.id);
+                                              setIsNotifOpen(false);
+                                              triggerRetryOrder({
+                                                serviceId: notif.serviceId,
+                                                serviceName: notif.serviceName,
+                                                link: notif.target,
+                                                quantity: notif.quantity,
+                                                orderNumber: notif.orderNumber,
+                                                charge: notif.charge,
+                                              });
+                                            }}
+                                            className="px-2.5 py-1 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-[11px] shadow-sm transition-all cursor-pointer flex items-center gap-1 active:scale-95"
+                                          >
+                                            <RotateCcw className="w-3 h-3" />
+                                            <span>إعادة المحاولة فوراً</span>
+                                          </button>
+                                        )}
+
+                                        <button
+                                          type="button"
+                                          onClick={() => handleNotificationClick(notif.id, notif.link || '/orders')}
+                                          className="text-[11px] text-indigo-400 hover:text-indigo-300 font-bold flex items-center gap-1 py-1 cursor-pointer"
+                                        >
+                                          <span>عرض تفاصيل الطلب</span>
+                                          <ExternalLink className="w-3 h-3" />
+                                        </button>
+                                      </div>
+                                    </div>
                                   </div>
-                                  <p className="text-[11px] text-slate-400 leading-relaxed">
-                                    {notif.message}
-                                  </p>
                                 </div>
-                              </button>
-                            ))
+                              );
+                            })
                           )}
                         </div>
                       </div>

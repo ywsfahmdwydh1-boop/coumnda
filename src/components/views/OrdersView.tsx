@@ -23,7 +23,7 @@ interface OrdersViewProps {
 
 export const OrdersView: React.FC<OrdersViewProps> = ({ onNavigateToServices }) => {
   const { token, updateBalanceLocally } = useAuth();
-  const { subscribeToOrderUpdates } = useNotifications();
+  const { subscribeToOrderUpdates, triggerRetryOrder } = useNotifications();
   const [orders, setOrders] = useState<Order[]>([]);
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -320,10 +320,28 @@ export const OrdersView: React.FC<OrdersViewProps> = ({ onNavigateToServices }) 
                           <button
                             onClick={() => handleCancelOrder(order)}
                             disabled={isBeingCancelled}
-                            className="px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 transition-colors disabled:opacity-50"
+                            className="px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 transition-colors disabled:opacity-50 cursor-pointer"
                             title="إلغاء الطلب واسترداد الرصيد لمحفظتك"
                           >
                             {isBeingCancelled ? 'جاري الإلغاء...' : 'إلغاء واسترداد'}
+                          </button>
+                        ) : order.status === 'canceled' || order.status === 'refunded' ? (
+                          <button
+                            onClick={() => {
+                              triggerRetryOrder({
+                                serviceId: order.serviceId,
+                                serviceName: order.serviceName,
+                                link: order.link,
+                                quantity: order.quantity,
+                                orderNumber: order.orderNumber,
+                                charge: order.charge,
+                              });
+                            }}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-md shadow-amber-500/20 transition-all cursor-pointer active:scale-95"
+                            title="إعادة طلب هذه الخدمة بنفس البيانات بنقرة واحدة"
+                          >
+                            <RotateCcw className="w-3.5 h-3.5" />
+                            <span>إعادة المحاولة</span>
                           </button>
                         ) : (
                           <span className="text-[11px] text-slate-500">-</span>

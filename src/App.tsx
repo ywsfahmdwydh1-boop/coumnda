@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext.tsx';
-import { NotificationProvider } from './context/NotificationContext.tsx';
+import { NotificationProvider, useNotifications } from './context/NotificationContext.tsx';
 import { Navbar } from './components/Navbar.tsx';
 import { AuthModal } from './components/AuthModal.tsx';
 import { LandingPageView } from './components/views/LandingPageView.tsx';
@@ -15,9 +15,16 @@ import { ShieldCheck, Sparkles } from 'lucide-react';
 
 function AppContent() {
   const { user } = useAuth();
+  const { registerNavigationHandler, pendingRetryOrder, clearRetryOrder } = useNotifications();
   // By default, show introductory landing page for visitors before entering main app content
   const [currentTab, setCurrentTab] = useState<string>(() => (user ? 'services' : 'landing'));
   const [isAuthOpen, setIsAuthOpen] = useState<boolean>(false);
+
+  // Register navigation handler so notifications & retries can switch tabs
+  useEffect(() => {
+    const unregister = registerNavigationHandler(setCurrentTab);
+    return unregister;
+  }, [registerNavigationHandler]);
 
   // When user successfully signs in, transition to main services store
   useEffect(() => {
@@ -52,6 +59,8 @@ function AppContent() {
           <ServicesView
             onNavigateToWallet={() => setCurrentTab('wallet')}
             onNavigateToOrders={() => setCurrentTab('orders')}
+            retryOrderData={pendingRetryOrder}
+            onClearRetryOrder={clearRetryOrder}
           />
         )}
 

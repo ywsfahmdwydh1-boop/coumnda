@@ -203,6 +203,16 @@ export interface AppNotification {
   link?: string;
   read: boolean;
   createdAt: string;
+  // Specific order metadata for in-app status updates & retry flow
+  orderId?: string;
+  orderNumber?: string;
+  orderStatus?: string;
+  serviceId?: string;
+  serviceName?: string;
+  quantity?: number;
+  target?: string;
+  charge?: number;
+  retryable?: boolean;
 }
 
 export interface EmailNotification {
