@@ -17,6 +17,7 @@ import {
 import {
   getAuth,
   GoogleAuthProvider,
+  FacebookAuthProvider,
   signInWithPopup,
   signOut,
   onAuthStateChanged,
@@ -34,6 +35,7 @@ const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
+export const facebookProvider = new FacebookAuthProvider();
 
 // ----------------------------------------------------
 // 2. Strict Error Handling (Conforming to Firebase Skill)
@@ -278,7 +280,7 @@ export async function persistDepositToFirestore(deposit: DepositRequest): Promis
 }
 
 // ----------------------------------------------------
-// 5. Firebase Google Sign-In for Admin Real-Time ABAC
+// 5. Firebase Social Sign-In (Google & Facebook)
 // ----------------------------------------------------
 export async function signInAdminWithGoogle(): Promise<{ success: boolean; user?: FirebaseUser; error?: string }> {
   try {
@@ -286,6 +288,48 @@ export async function signInAdminWithGoogle(): Promise<{ success: boolean; user?
     return { success: true, user: result.user };
   } catch (err: any) {
     return { success: false, error: err.message || 'فشل تسجيل الدخول بـ Google' };
+  }
+}
+
+export async function signInWithGoogle(): Promise<{
+  success: boolean;
+  user?: { email: string; displayName?: string; uid: string; photoURL?: string };
+  error?: string;
+}> {
+  try {
+    const result = await signInWithPopup(auth, googleProvider);
+    return {
+      success: true,
+      user: {
+        email: result.user.email || '',
+        displayName: result.user.displayName || undefined,
+        uid: result.user.uid,
+        photoURL: result.user.photoURL || undefined,
+      },
+    };
+  } catch (err: any) {
+    return { success: false, error: err?.code || err?.message || 'فشل تسجيل الدخول بـ Google' };
+  }
+}
+
+export async function signInWithFacebook(): Promise<{
+  success: boolean;
+  user?: { email: string; displayName?: string; uid: string; photoURL?: string };
+  error?: string;
+}> {
+  try {
+    const result = await signInWithPopup(auth, facebookProvider);
+    return {
+      success: true,
+      user: {
+        email: result.user.email || `${result.user.uid}@facebook.user`,
+        displayName: result.user.displayName || undefined,
+        uid: result.user.uid,
+        photoURL: result.user.photoURL || undefined,
+      },
+    };
+  } catch (err: any) {
+    return { success: false, error: err?.code || err?.message || 'فشل تسجيل الدخول بـ Facebook' };
   }
 }
 
